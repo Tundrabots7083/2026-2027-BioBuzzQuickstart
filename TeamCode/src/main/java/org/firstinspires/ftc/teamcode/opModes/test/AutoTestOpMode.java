@@ -2,11 +2,13 @@ package org.firstinspires.ftc.teamcode.opModes.test;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 
 @Autonomous(name = "Auto Test", group = "Auto")
 public class AutoTestOpMode extends LinearOpMode {
+    private DcMotorEx testMotor2;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -26,11 +28,15 @@ public class AutoTestOpMode extends LinearOpMode {
         while (opModeIsActive()) {
             telemetry.addLine("running the op mode...");
             telemetry.update();
+            testMotor2.setPower(-1.0);
         }
     }
 
     private void initialize(LinearOpMode opMode) {
         telemetry.addLine("Initialias");
         telemetry.update();
+
+        testMotor2 = hardwareMap.get(DcMotorEx.class, "motor2");
+
     }
 }
