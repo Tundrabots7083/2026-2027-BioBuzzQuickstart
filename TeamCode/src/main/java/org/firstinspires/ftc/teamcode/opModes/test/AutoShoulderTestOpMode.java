@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 
-@Autonomous(name = "Auto Test", group = "Auto")
-public class AutoTestOpMode extends LinearOpMode {
+@Autonomous(name = "Auto Shoulder Test", group = "Auto")
+public class AutoShoulderTestOpMode extends LinearOpMode {
     private DcMotorEx testMotor2;
 
 
