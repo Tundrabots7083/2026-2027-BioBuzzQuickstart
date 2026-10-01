@@ -14,6 +14,8 @@ import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
 public class Constants {
 
     public static MecanumConfig drivetrainConfig = new MecanumConfig(
@@ -33,18 +35,16 @@ public class Constants {
             }
     );
 
-    // TODO: replace entirely with the PinpointConfig that AutoTune generates.
-    // Hand-measured for cross-check: forward pod 3.65 in right of center,
-    // strafe pod 8.54 in behind center.
-    public static PinpointConfig localizerConfig = new PinpointConfig(
-            c -> {
-                c.name.set("pinpoint");   // TODO: confirm actual config name
-                c.xPodOffset.set(0.0);
-                c.yPodOffset.set(0.0);
-                c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
-                c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
-            }
-    );
+    public static PinpointConfig localizerConfig = new PinpointConfig(c -> {
+        c.name.set("pinpoint");
+        c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
+        c.xPodOffset.set(-4.33);
+        c.yPodOffset.set(2.62);
+        c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+        c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+        c.globalDistanceUnit.set(DistanceUnit.INCH);
+        c.offsetUnits.set(DistanceUnit.INCH);
+    });
 
     // TODO: paste the ForesightConfig that AutoTune generates.
     public static ForesightConfig foresightConfig = new ForesightConfig(
