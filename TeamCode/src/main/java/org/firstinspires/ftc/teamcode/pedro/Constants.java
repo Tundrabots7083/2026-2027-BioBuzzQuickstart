@@ -18,22 +18,16 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class Constants {
 
-    public static MecanumConfig drivetrainConfig = new MecanumConfig(
-            c -> {
-                c.frontLeftName.set("front_left");
-                c.backLeftName.set("rear_left");
-                c.frontRightName.set("front_right");
-                c.backRightName.set("rear_right");
-
-                // TODO: directions are a guess until we test — see note below
-                c.frontLeftDirection.set(DcMotorSimple.Direction.REVERSE);
-                c.backLeftDirection.set(DcMotorSimple.Direction.REVERSE);
-                c.frontRightDirection.set(DcMotorSimple.Direction.FORWARD);
-                c.backRightDirection.set(DcMotorSimple.Direction.FORWARD);
-
-                c.manualBrakeMode.set(true);
-            }
-    );
+    public static MecanumConfig drivetrainConfig = new MecanumConfig(c -> {
+        c.frontLeftName.set("front_left");
+        c.frontRightName.set("front_right");
+        c.backLeftName.set("rear_left");
+        c.backRightName.set("rear_right");
+        c.frontLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+        c.frontRightDirection.set(DcMotorSimple.Direction.FORWARD);
+        c.backLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+        c.backRightDirection.set(DcMotorSimple.Direction.FORWARD);
+    });
 
     public static PinpointConfig localizerConfig = new PinpointConfig(c -> {
         c.name.set("pinpoint");
