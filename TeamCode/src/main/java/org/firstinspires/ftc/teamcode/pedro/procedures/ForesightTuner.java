@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.pedro.procedures;
 
+import com.pedropathing.algorithm.ForesightConfig;
 import com.pedropathing.drivetrain.DrivePowers;
 import com.pedropathing.drivetrain.Drivetrain;
 import com.pedropathing.localization.Localizer;
@@ -23,7 +24,7 @@ public class ForesightTuner extends Procedure {
     Function<HardwareMap, Localizer> localizerFunction;
     Function<HardwareMap, Drivetrain> drivetrainFunction;
 
-    public ForesightTuner(Function<HardwareMap, Localizer> localizerFunction, Function<HardwareMap, Drivetrain> drivetrainFunction) {
+    public ForesightTuner(Function<HardwareMap, Localizer> localizerFunction, Function<HardwareMap, Drivetrain> drivetrainFunction, ForesightConfig foresightConfig) {
         super("Foresight Tuner", "A procedure for tuning the Foresight Algorithm.");
         this.localizerFunction = localizerFunction;
         this.drivetrainFunction = drivetrainFunction;
