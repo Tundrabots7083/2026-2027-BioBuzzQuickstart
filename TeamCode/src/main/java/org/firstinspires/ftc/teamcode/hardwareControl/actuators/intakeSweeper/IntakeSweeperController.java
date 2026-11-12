@@ -1,17 +1,89 @@
 package org.firstinspires.ftc.teamcode.hardwareControl.actuators.intakeSweeper;
 
-
-import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
-import com.pedropathing.math.Pose;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.PwmControl;
-import com.qualcomm.robotcore.hardware.ServoImplEx;
-import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.teamcode.hardwareConfig.actuators.intakeSweeper.IntakeSweeperConstants;
 
+public class IntakeSweeperController {
+    private CRServo intakeSweeperServo;
+    private IntakeSweeperConstants intakeSweeperConstants;
+    private Telemetry telemetry;
+
+    private boolean initialized = false;
+    private boolean spinning = false;
+
+    private static final IntakeSweeperController INSTANCE = new IntakeSweeperController();
+
+    //private constructor to prevent instantiation
+    private IntakeSweeperController() {
+
+    }
+
+    public static IntakeSweeperController getInstance() {
+        return INSTANCE;
+    }
+
+    public void initialize(HardwareMap hardwareMap, Telemetry telemetry) {
+        if (initialized) {
+            return;
+        }
+        this.telemetry = telemetry;
+        this.intakeSweeperConstants = new IntakeSweeperConstants();
+
+        intakeSweeperServo = hardwareMap.get(CRServo.class, intakeSweeperConstants.name);
+        intakeSweeperServo.setPower(intakeSweeperConstants.stopPower);
+
+        spinning = false;
+        initialized = true;
+    }
+
+// Stops the wheel, forgets the hardware, so next OpMode has to initialize again.
+    public void reset() {
+        if (!initialized) {
+            return;
+        }
+        intakeSweeperServo.setPower(intakeSweeperConstants.stopPower);
+        spinning = false;
+        initialized = false;
+    }
+
+    public void spin(){
+        intakeSweeperServo.setPower(intakeSweeperConstants.spinPower);
+        spinning = true;
+    }
+
+    public void stop(){
+        intakeSweeperServo.setPower(intakeSweeperConstants.stopPower);
+        spinning = false;
+    }
+
+    public boolean isSpinning(){
+        return spinning;
+    }
+
+    public void update(){
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+//Below is last year's code in full, commented out.
+//New code uses a continuous servo with simple functions.
+//Wildly different than the code below, which was a turret controller; a positional servo.
+//So, feel free to delete whenever. I wanted to keep it before this class was double-checked.
+
+/*
 @Configurable
 public class IntakeSweeperController {
 
@@ -109,15 +181,7 @@ public class IntakeSweeperController {
         setTurretTargetAngle(RESET_POSITION);
     }
 
-    /**
-     * Computes inputSweeper angle (degrees) relative to robot heading.
-     *
-     * @param robotPose Pose3D of robot (field coordinates)
-     * @param targetPosition target position (field)
-     * @param intakeSweeperXOffset inputSweeper offset forward from robot center
-     * @param intakeSweeperYOffset inputSweeper offset right from robot center
-     * @return inputSweeper angle in degrees (0 = aligned with robot heading)
-     */
+
     private double getTurretAngleDegrees(
             Pose robotPose,
             Position targetPosition,
@@ -156,3 +220,4 @@ public class IntakeSweeperController {
         return intakeSweeperAngleDeg;
     }
 }
+*/
