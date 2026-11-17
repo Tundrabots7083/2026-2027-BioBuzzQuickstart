@@ -19,20 +19,23 @@ public class IntakeMotorController {
     private IntakeMotorConstants intakeMotorConstants;
 
     private double TOLERABLE_ERROR;
+    private double IDLE_RPM;
+    private double INTAKE_RPM;
     private double targetVelocity;
     private double lastPower = 0.0;
 
     // --- Effort-based stuck detection ---
     private boolean isStuck = false;
 
-    private static final double STUCK_CURRENT = 2.5;   // amps of large effort
-    private static final long STUCK_TIME_MS = 200;
+    private double STUCK_CURRENT;  // amps of large effort
+    private long STUCK_TIME_MS;
 
     private long effortStartTime = -1;
 
     // --- Unstick ---
-    private static final long UNSTICK_DURATION_MS = 380;
-    private static final double UNSTICK_REVERSE_POWER = -0.5;
+    private long UNSTICK_DURATION_MS;
+    private double UNSTICK_REVERSE_POWER;
+    private boolean AUTO_UNSTICK; //report the jam, but dont reverse
 
     private boolean unsticking = false;
     private long unstickStartTime = -1;
@@ -42,7 +45,7 @@ public class IntakeMotorController {
     /**
      * velocity gain
      */
-    private double Kp = 0.0005;
+    private double Kp;
 
     private SimpleVelocityController velocityController;
     private boolean initialized = false;
@@ -86,10 +89,20 @@ public class IntakeMotorController {
         intakeMotor.setMode(intakeMotorConstants.resetMode);
         intakeMotor.setMode(intakeMotorConstants.mode);
         intakeMotor.setDirection(intakeMotorConstants.motorDirection);
+        intakeMotor.setZeroPowerBehavior(intakeMotorConstants.zeroPowerBehavior);
     }
 
     private void initializeConstants() {
+
         TOLERABLE_ERROR = intakeMotorConstants.tolerableError;
+        Kp = intakeMotorConstants.velocityKp;
+        IDLE_RPM = intakeMotorConstants.idleRPM;
+        INTAKE_RPM = intakeMotorConstants.intakeRPM;
+        STUCK_CURRENT = intakeMotorConstants.stuckCurrentAmps;
+        STUCK_TIME_MS = intakeMotorConstants.stuckTimeMs;
+        UNSTICK_DURATION_MS = intakeMotorConstants.stuckTimeMs;
+        UNSTICK_REVERSE_POWER = intakeMotorConstants.unstickReversePower;
+        AUTO_UNSTICK = intakeMotorConstants.autoUnstick;
     }
 
     private void initializeVelControl() {
@@ -98,10 +111,12 @@ public class IntakeMotorController {
 
     /** RPM */
     public double getCurrentVelocity() {
+
         return intakeMotor.getVelocity(AngleUnit.DEGREES) / 6.0;
     }
 
     public double getTargetVelocity() {
+
         return targetVelocity;
     }
 
@@ -112,6 +127,14 @@ public class IntakeMotorController {
         }
 
         update();
+    }
+
+    public void spinIdle(){
+        spinToTargetVelocity(IDLE_RPM);
+    }
+
+    public void spinIntake(){
+        spinToTargetVelocity(INTAKE_RPM);
     }
 
     public boolean isOnTarget() {
@@ -131,16 +154,19 @@ public class IntakeMotorController {
     }
 
     public boolean isStuck() {
+
         return isStuck;
     }
 
     public boolean isUnsticking() {
+
         return unsticking;
     }
 
     public void stop() {
         spinToTargetVelocity(0.0);
         intakeMotor.setPower(0.0);
+        lastPower = 0.0; // new - matches what the motor really has
     }
 
     public void clearStuck() {
@@ -173,6 +199,7 @@ public class IntakeMotorController {
         unstickStartTime = System.currentTimeMillis();
         velocityController.reset();
         intakeMotor.setPower(UNSTICK_REVERSE_POWER);
+        lastPower = UNSTICK_REVERSE_POWER; //new - so next power always sent, again.
     }
 
 
@@ -207,7 +234,7 @@ public class IntakeMotorController {
 
         detectStuck(intakeCurrent);
 
-        if (isStuck && !unsticking) {
+        if (isStuck && !unsticking && AUTO_UNSTICK) {
             startUnstick();
         }
     }

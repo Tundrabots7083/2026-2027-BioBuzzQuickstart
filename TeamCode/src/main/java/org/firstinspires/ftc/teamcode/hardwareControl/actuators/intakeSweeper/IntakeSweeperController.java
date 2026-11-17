@@ -18,7 +18,6 @@ public class IntakeSweeperController {
 
     //private constructor to prevent instantiation
     private IntakeSweeperController() {
-
     }
 
     public static IntakeSweeperController getInstance() {

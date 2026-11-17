@@ -32,6 +32,7 @@ public class IntakeMotorConstants {
     public long stuckTimeMs = 200; //NEEDS TUNING - how long the current must stay that high before its counted as a jam.
     public long unstickDurationMs = 380; //NEEDS TUNING - when stuck, the controller reverses the motor this long to clear it.
     public double unstickReversePower = -0.5; //NEEDS TUNING - power used for the reverse pulse
+    public boolean autoUnstick = true; //true is reverse to clear a jam, false is only report it.
 
 
 }
