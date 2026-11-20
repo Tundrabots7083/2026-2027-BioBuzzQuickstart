@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTreeComponents.actionFunctions.actuators.intakeMotor;
+package org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTreeComponents.ActionFunctions.actuators.intakeMotor;
 
 import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
 import org.firstinspires.ftc.robotcore.external.Telemetry;

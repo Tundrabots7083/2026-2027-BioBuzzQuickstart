@@ -21,6 +21,7 @@ public class IntakeMotorController {
     private double TOLERABLE_ERROR;
     private double IDLE_RPM;
     private double INTAKE_RPM;
+    private double REJECT_RPM;
     private double targetVelocity;
     private double lastPower = 0.0;
 
@@ -98,9 +99,10 @@ public class IntakeMotorController {
         Kp = intakeMotorConstants.velocityKp;
         IDLE_RPM = intakeMotorConstants.idleRPM;
         INTAKE_RPM = intakeMotorConstants.intakeRPM;
+        REJECT_RPM = intakeMotorConstants.rejectRPM;
         STUCK_CURRENT = intakeMotorConstants.stuckCurrentAmps;
         STUCK_TIME_MS = intakeMotorConstants.stuckTimeMs;
-        UNSTICK_DURATION_MS = intakeMotorConstants.stuckTimeMs;
+        UNSTICK_DURATION_MS = intakeMotorConstants.unstickDurationMs;
         UNSTICK_REVERSE_POWER = intakeMotorConstants.unstickReversePower;
         AUTO_UNSTICK = intakeMotorConstants.autoUnstick;
     }
@@ -135,6 +137,10 @@ public class IntakeMotorController {
 
     public void spinIntake(){
         spinToTargetVelocity(INTAKE_RPM);
+    }
+
+    public void spinReject(){
+        spinToTargetVelocity(REJECT_RPM);
     }
 
     public boolean isOnTarget() {

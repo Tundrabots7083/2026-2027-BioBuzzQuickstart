@@ -19,6 +19,7 @@ public class IntakeMotorConstants {
 
     public double idleRPM = 0; //NEEDS TUNING - speed when not collecting balls.
     public double intakeRPM = 0; //NEEDS TUNING - speed while collecting balls.
+    public double rejectRPM = -100; //NEEDS TUNING
 
     //public double startPosition = 0;
     //public double targetPosition = 0;
