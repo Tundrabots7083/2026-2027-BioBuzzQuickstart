@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTreeComponents.actionFunctions.sensors.Gamepad;
+package org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTreeComponents.ActionFunctions.sensors.Gamepad;
 
 
 import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;

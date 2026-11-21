@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTreeComponents.ActionFunctions.IntakeSweeper;
+package org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTreeComponents.ActionFunctions.actuators.IntakeSweeper;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTreeComponents.general.ActionFunction;
@@ -6,12 +6,12 @@ import org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTree
 import org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTreeComponents.general.Status;
 import org.firstinspires.ftc.teamcode.hardwareControl.actuators.intakeSweeper.IntakeSweeperController;
 
-public class StopIntakeSweeper implements ActionFunction {
+public class SpinIntakeSweeper implements ActionFunction {
     private final Telemetry telemetry;
     private final IntakeSweeperController intakeSweeperController;
     private Status lastStatus = Status.FAILURE;   // FAILURE = "haven't done it yet"
 
-    public StopIntakeSweeper(Telemetry telemetry, IntakeSweeperController intakeSweeperController) {
+    public SpinIntakeSweeper(Telemetry telemetry, IntakeSweeperController intakeSweeperController) {
         this.telemetry = telemetry;
         this.intakeSweeperController = intakeSweeperController;
     }
@@ -21,7 +21,7 @@ public class StopIntakeSweeper implements ActionFunction {
         if (lastStatus == Status.SUCCESS) {
             return lastStatus;                    // already done: skip
         }
-        intakeSweeperController.stop();
+        intakeSweeperController.spin();
         lastStatus = Status.SUCCESS;
         return lastStatus;
     }
