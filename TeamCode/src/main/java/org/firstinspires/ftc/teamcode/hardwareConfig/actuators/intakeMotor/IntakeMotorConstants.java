@@ -9,7 +9,7 @@ public class IntakeMotorConstants {
     public String motorName = "IntakeMotor";
 
     //public String motorConfigurationType = "clone";
-    public double ticksPerRev = 384.5; // check against gobuilda motor; needs 435RPM
+    public double ticksPerRev = 103.8; // check against gobuilda motor; needs 1620RPM
     public double achievableMaxRPMFraction = 1.0;
     public double gearing = 1; //check against gear ratio between motor and intake shaft, make sure direct, otherwise change from 1.
     public DcMotor.RunMode mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
@@ -17,15 +17,17 @@ public class IntakeMotorConstants {
     public DcMotorSimple.Direction motorDirection = DcMotorSimple.Direction.FORWARD; //flip to REVERSE if running intake pushes balls out.
     public DcMotor.ZeroPowerBehavior zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE;
 
-    public double idleRPM = 0; //NEEDS TUNING - speed when not collecting balls.
-    public double intakeRPM = 0; //NEEDS TUNING - speed while collecting balls.
-    public double rejectRPM = -100; //NEEDS TUNING
+    public double idleRPM = 200; //NEEDS TUNING - speed when not collecting balls.
+    public double intakeRPM = 600; //NEEDS TUNING - speed while collecting balls.
+    public double rejectRPM = -200; //NEEDS TUNING
 
     //public double startPosition = 0;
     //public double targetPosition = 0;
     public double tolerableError = 20; //NEEDS TUNING - how close in RPM counts as 'at speed', for isOnTarget() conditional.
 
-    public double velocityKp = 0.0005; //NEEDS TUNING
+    public double velocityKp = 0.0002; //NEEDS TUNING
+
+    public double velocityKf = 0.0006; //NEEDS TUNING
 
 
     //JAM DETECTION - NEW, CHECK OVER

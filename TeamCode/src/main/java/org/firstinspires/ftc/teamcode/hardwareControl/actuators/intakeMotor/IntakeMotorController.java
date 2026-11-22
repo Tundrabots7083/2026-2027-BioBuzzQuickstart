@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.hardwareControl.actuators.intakeMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -47,6 +48,7 @@ public class IntakeMotorController {
      * velocity gain
      */
     private double Kp;
+    private double Kf;
 
     private SimpleVelocityController velocityController;
     private boolean initialized = false;
@@ -97,6 +99,7 @@ public class IntakeMotorController {
 
         TOLERABLE_ERROR = intakeMotorConstants.tolerableError;
         Kp = intakeMotorConstants.velocityKp;
+        Kf = intakeMotorConstants.velocityKf;
         IDLE_RPM = intakeMotorConstants.idleRPM;
         INTAKE_RPM = intakeMotorConstants.intakeRPM;
         REJECT_RPM = intakeMotorConstants.rejectRPM;
@@ -224,7 +227,7 @@ public class IntakeMotorController {
 
         double currentVelocity = getCurrentVelocity();
 
-        double power = velocityController.calculate(targetVelocity, currentVelocity);
+        double power = Range.clip(Kf * targetVelocity + velocityController.calculate(targetVelocity, currentVelocity), -1.0, 1.0);
         double intakeCurrent = intakeMotor.getCurrent(CurrentUnit.AMPS);
 
         if (Math.abs(lastPower - power) > 0.02) {

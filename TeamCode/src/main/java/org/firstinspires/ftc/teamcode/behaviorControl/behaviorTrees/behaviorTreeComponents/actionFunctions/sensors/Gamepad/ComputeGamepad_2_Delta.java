@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTreeComponents.ActionFunctions.sensors.Gamepad;
 
 
-import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
+
 
 import org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTreeComponents.general.ActionFunction;
 import org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTreeComponents.general.BlackBoard;
@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTree
 import org.firstinspires.ftc.teamcode.hardwareConfig.sensors.gamepad.GamepadSnapshot;
 import org.firstinspires.ftc.teamcode.hardwareControl.sensors.gamepad.GamepadDelta;
 
-@Configurable
+
 public class ComputeGamepad_2_Delta implements ActionFunction {
 
     private final String currKey = "gamepad2Snapshot";

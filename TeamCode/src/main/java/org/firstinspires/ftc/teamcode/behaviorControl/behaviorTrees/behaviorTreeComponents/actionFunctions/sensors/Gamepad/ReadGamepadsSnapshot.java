@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTreeComponents.ActionFunctions.sensors.Gamepad;
 
 
-import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTree
 import org.firstinspires.ftc.teamcode.behaviorControl.behaviorTrees.behaviorTreeComponents.general.Status;
 import org.firstinspires.ftc.teamcode.hardwareConfig.sensors.gamepad.GamepadSnapshot;
 
-@Configurable
+
 public class ReadGamepadsSnapshot implements ActionFunction {
 
     Telemetry telemetry;

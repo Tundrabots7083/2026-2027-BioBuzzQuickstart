@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.hardwareControl.actuators.pollenElevator;
 
 
-import com.bylazar.ftcontrol.panels.configurables.annotations.Configurable;
+
 import com.pedropathing.math.Pose;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PwmControl;
@@ -12,7 +12,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.teamcode.hardwareConfig.actuators.pollenElevator.PollenElevatorConstants;
 
-@Configurable
+
 public class PolenElevatorController {
 
     private ServoImplEx turretServo;
